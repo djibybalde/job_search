@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+job-search = {editable = true, path = "."}
+tox = "*"
+numpy = "*"
+pandas = "*"
+bs4 = "*"
+selenium = "*"
+check-manifest = "*"
+termcolor = "*"
+
+[dev-packages]
+pytest = ">=3.7"
+
+[requires]
+python_version = "3.7"
