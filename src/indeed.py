@@ -258,11 +258,3 @@ class JobFinder:
 
 if __name__ == '__main__':
     JobFinder(login=False, job_title='data scientist', location='france', max_numb=50, ).get_results()
-    print(' ')
-    time.sleep(timer(2, 4))
-
-    JobFinder(login=False, job_title="data analyst", location='france', max_numb=20, ).get_results()
-    print(' ')
-    time.sleep(timer(2, 4))
-
-    JobFinder(login=False, job_title="chargé d'études statistiques", location='france', max_numb=30, ).get_results()
