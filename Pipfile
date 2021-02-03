@@ -12,6 +12,7 @@ bs4 = "*"
 selenium = "*"
 check-manifest = "*"
 termcolor = "*"
+nltk = "*"
 
 [dev-packages]
 pytest = ">=3.7"

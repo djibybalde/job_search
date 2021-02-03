@@ -1,0 +1,12 @@
+{
+  "excludes": [
+    "freelance", "stage", "stagiaire", "internship", "apprentissage", "apprenti", "alternance",
+    "intern", "contrat pro", "alternance/stage", "stage/alternance", "apprenti",
+    "lead", "senior", "confirmé", "confirme", "confirm", "expert", "expérimenté", "experimente", "chef", "chief"
+  ],
+
+  "includes": [
+    "python", "r", "sql", "machine learning", "deep learning",
+    "data science", "data scientist", "data analyse", "data analyst", "statistiques", "statisticien"
+  ]
+}
