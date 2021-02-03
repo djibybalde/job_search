@@ -1,8 +1,8 @@
 
-[Job Search](https://github.com/djibybalde/job_search) 
+[JobFinder](https://github.com/djibybalde/job_search) 
 ==========
 
-Build a [`Job Finder`](https://github.com/djibybalde/job_search) to scrape jobs on https://fr.indeed.com website.
+Build a [`JobFinder`](https://github.com/djibybalde/job_search) to scrape jobs on https://fr.indeed.com website.
 
 
 External tool
@@ -13,7 +13,7 @@ If your are using MacOS, you don't have to download [ChromeDriver](https://chrom
 Otherwise, download it from [here](https://chromedriver.chromium.org) and put it in the `references` folder with the name `chromedriver`. 
 
 
-How to use this [`Job Finder`](https://github.com/djibybalde/job_search)
+How to use this [`JobFinder`](https://github.com/djibybalde/job_search)
 ============
 
 To install the material in your computer:
@@ -51,4 +51,4 @@ $ python
 
 - ***Note that*** if you set `login=True`, your [fr.indeed.com](https://fr.indeed.com) `email` and `password` will be asked to login.
 
-**Enjoy with [Job Search](https://github.com/djibybalde/job_search) and *good Luck!***
+**Enjoy with [JobFinder](https://github.com/djibybalde/job_search) and *good Luck!***
