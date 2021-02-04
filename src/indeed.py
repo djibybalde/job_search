@@ -55,7 +55,6 @@ def params(email: str = '', pwd: str = None) -> tuple:
         A tuple object containing your e-mail and password
     """
 
-    print(' ')
     if email is None or email == '':
         email = input(colored('Enter your E-mail address here: ', 'green'))
 
@@ -131,10 +130,11 @@ class JobFinder:
         """ Searching for jobs """
 
         # Open https://fr.indeed.com in the Google Chrome browser and login.
+        print(' ')
         self.login()
         time.sleep(timer(1, 2))
-
-        print(f"Searching for {colored(self.job_title.capitalize(), 'blue')} job ...")
+        template = "Searching for {} job in {} ..."
+        print(template.format(colored(self.job_title.capitalize(), 'blue'), colored(self.location, 'blue')))
 
         # What kind of job are you for ?
         keywords = self.driver.find_element_by_id("text-input-what")
@@ -190,7 +190,9 @@ class JobFinder:
         page = 0
         jobs = list()
 
-        print(f"Scraping {colored(self.job_title.capitalize(), 'blue')} jobs ...")
+        template = "Scraping {} job in {} ..."
+        print(template.format(colored(self.job_title.capitalize(), 'blue'), colored(self.location, 'blue')))
+
         while len(jobs) < self.max_numb:
             count = 0
             print(' - Scraping in page {} ... '.format(1 + page))
@@ -241,8 +243,8 @@ class JobFinder:
             NAME = ''.join(word.capitalize() for word in self.job_title.split())
 
         df = pd.DataFrame(jobs).drop_duplicates(ignore_index=True)
-        template = colored('Found {} {} jobs (no-duplicated)', 'cyan')
-        print(template.format(df.shape[0], NAME))
+        template = colored('According to your search criteria, there are {} {} jobs available in {}', 'cyan')
+        print(template.format(df.shape[0], NAME, self.location, ))
 
         FILE_LOC = ''.join([OUTPUT_PATH, NAME, '.xlsx'])
         df.to_excel(FILE_LOC)
