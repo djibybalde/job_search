@@ -45,8 +45,8 @@ $ python
 
 ```bash
 $ python
->> from indeed import JobFinder
->> JobFinder(login=True, job_title='Data Science', location='Lyon', max_numb=10).get_results()
+>>> from indeed import JobFinder
+>>> JobFinder(login=True, job_title='Data Science', location='Lyon', max_numb=10).get_results()
 ```
 
 - ***Note that*** if you set `login=True`, your [fr.indeed.com](https://fr.indeed.com) `email` and `password` will be asked to login.
