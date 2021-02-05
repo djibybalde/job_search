@@ -1,8 +1,8 @@
 
 [JobFinder](https://github.com/djibybalde/job_search) 
-==========
+===========
 
-Build a [`JobFinder`](https://github.com/djibybalde/job_search) to scrape jobs on https://fr.indeed.com.
+Build a [`JobFinder`](https://github.com/djibybalde/job_search) to scrape jobs on [https://fr.indeed.com](https://fr.indeed.com).
 
 
 External tool
@@ -14,11 +14,11 @@ Otherwise, download it from [here](https://chromedriver.chromium.org) and put it
 
 
 How to use this [`JobFinder`](https://github.com/djibybalde/job_search)
-============
+=============================
 
 To install the material in your computer:
 - Open your Terminal
-- Go to the [job_search](https://github.com/djibybalde/job_search) folder and install the necessary packages as following
+- Go to the [job_search](https://github.com/djibybalde/job_search) folder and install the necessary packages as following.
 ```bash
 $ cd job_search
 $ pip install pipenv
@@ -38,10 +38,10 @@ $ python
 ```
 
 - You can also specifier some arguments:
-- `login[OPTIONAL]`: Whether to login with your email and password on the website.  
+- `login[OPTIONAL]`: Whether to login with your email and password on the website  
 - `job_title[OPTIONAL]`: What job are you looking for ? Default is `Data Science` 
-- `location[OPTIONAL]`: Where do you want to apply for job ? For example Paris, Lyon.
-- `max_numb[OPTIONAL]`: How many example of job do you want to apply ? Default is 20. 
+- `location[OPTIONAL]`: Where do you want to apply for job ? For example Paris, Lyon
+- `max_numb[OPTIONAL]`: How many example of job do you want to apply ? Default is 20 
 
 ```bash
 $ python
@@ -49,6 +49,9 @@ $ python
 >>> JobFinder(login=True, job_title='Data Science', location='Lyon', max_numb=10).get_results()
 ```
 
+[![asciicast](https://asciinema.org/a/BCNnHPIbBAoS3qdwTF5po1foi.svg)](https://asciinema.org/a/BCNnHPIbBAoS3qdwTF5po1foi)
+
 - ***Note that*** if you set `login=True`, your [fr.indeed.com](https://fr.indeed.com) `email` and `password` will be asked to login.
 
+________________________________________________________________________________________________________________________
 **Enjoy with [JobFinder](https://github.com/djibybalde/job_search) and *good Luck!***

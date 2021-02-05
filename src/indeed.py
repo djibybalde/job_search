@@ -130,10 +130,10 @@ class JobFinder:
         """ Searching for jobs """
 
         # Open https://fr.indeed.com in the Google Chrome browser and login.
-        print(' ')
+        print(colored('\nOpening Google Chrome browser ... ', 'blue'))
         self.login()
         time.sleep(timer(1, 2))
-        template = "Searching for {} job in {} ..."
+        template = "Searching for {} jobs in {} ..."
         print(template.format(colored(self.job_title.capitalize(), 'blue'), colored(self.location, 'blue')))
 
         # What kind of job are you for ?
@@ -194,11 +194,9 @@ class JobFinder:
         print(template.format(colored(self.job_title.capitalize(), 'blue'), colored(self.location, 'blue')))
 
         while len(jobs) < self.max_numb:
-            count = 0
-            print(' - Scraping in page {} ... '.format(1 + page))
 
-            current_page = self.driver.page_source
-            soup = BeautifulSoup(current_page, "lxml")
+            print(' - Scraping in page {} ... '.format(1 + page))
+            soup = BeautifulSoup(self.driver.page_source, "lxml")
             jobs_container = soup.find(id="resultsCol")
 
             for job in jobs_container.find_all('div', class_='jobsearch-SerpJobCard'):
@@ -223,7 +221,6 @@ class JobFinder:
                     # Save it
                     jobs.append({'Title': title, 'Company': company, 'Location': location, 'Date': date, 'Link': link})
 
-                count += 1
                 if len(jobs) >= self.max_numb:
                     break
 
@@ -235,20 +232,21 @@ class JobFinder:
             except NoSuchElementException:
                 pass
 
-        # Ignore the duplicated data and write to a Excel file
-        if all(n in word_tokenize(self.job_title, language='french')
-               for n in word_tokenize("chargé d'études statistiques", language='french')):
-            NAME = 'Statistiques'
+        # Output file name
+        if not all(w not in word_tokenize(self.job_title, language='french') for w in ['statistiques', 'statistique', 'statisticien']):
+            file_name = 'Statistiques'
         else:
-            NAME = ''.join(word.capitalize() for word in self.job_title.split())
+            file_name = ''.join(word.capitalize() for word in self.job_title.split())
 
+        # Ignore the duplicated data
         df = pd.DataFrame(jobs).drop_duplicates(ignore_index=True)
         template = colored('According to your search criteria, there are {} {} jobs available in {}', 'cyan')
-        print(template.format(df.shape[0], NAME, self.location, ))
+        print(template.format(df.shape[0], self.job_title.capitalize(), self.location, ))
 
-        FILE_LOC = ''.join([OUTPUT_PATH, NAME, '.xlsx'])
-        df.to_excel(FILE_LOC)
-        print(f"This data are written in {colored(FILE_LOC, 'cyan')}")
+        # Write into the `file_name` Excel file
+        file_loc = ''.join([OUTPUT_PATH, file_name, '.xlsx'])
+        df.to_excel(file_loc)
+        print(f"This data are written in {colored(file_loc, 'cyan')}\n")
 
         # Close the driver
         self.driver.quit()
