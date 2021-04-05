@@ -8,22 +8,35 @@ import yaml
 import json
 import numpy as np
 import pandas as pd
+from pathlib import Path
+from getpass import getpass
 from termcolor import colored
-from nltk.tokenize import word_tokenize
-
 from bs4 import BeautifulSoup
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
 
+import nltk
+from nltk.tokenize import word_tokenize
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    print('Downloading nltk resource (package punkt) ...')
+    nltk.download('punkt')
+    print('Package punkt is downloaded into {}'.format(nltk.data.find('tokenizers/punkt')))
+
+
+# Project root directory
+ROOT_DIR = Path(__file__).resolve().parents[1]
+
 # Yaml file to get directories/paths
-ENV_FILE = os.path.join(os.getcwd().split('job_search')[0], 'job_search', 'env.yaml')
+ENV_FILE = os.path.join(ROOT_DIR, 'env.yaml')
+
 with open(ENV_FILE) as yf:
     PARAMS = yaml.load(yf, Loader=yaml.FullLoader)
 
 # Directories initialisation
-ROOT_DIR = os.path.dirname(os.path.abspath(ENV_FILE))
 DRIVER_PATH = os.path.join(ROOT_DIR, PARAMS['directories']['driver_dir'], PARAMS['files']['driver_path'])
 FILTER_FILE = os.path.join(ROOT_DIR, PARAMS['directories']['data_dir'], PARAMS['files']['filter_word'])
 OUTPUT_PATH = os.path.join(ROOT_DIR, PARAMS['directories']['job_data'])
@@ -56,10 +69,10 @@ def params(email: str = '', pwd: str = None) -> tuple:
     """
 
     if email is None or email == '':
-        email = input(colored('Enter your E-mail address here: ', 'green'))
+        email = input(colored('Please enter your Indeed username: ', 'green'))
 
     if pwd is None or pwd == '':
-        pwd = input(colored('Enter your password here: ', 'green'))
+        pwd = getpass(prompt=colored('Please enter your Indeed password: ', 'green'), stream=None)
 
     return email, pwd
 
@@ -88,7 +101,8 @@ class JobFinder:
         """
 
         self.log_in = login
-        self.email, self.password = params() if self.log_in else '', ''
+        if self.log_in:
+            self.email, self.password = params()
 
         self.job_title = job_title.lower()
         self.job_type = job_type.lower()
@@ -143,7 +157,7 @@ class JobFinder:
         keywords.send_keys(self.job_title)
         time.sleep(timer(1, 2))
 
-        # Where do want to apply for job ?
+        # Where do you want to apply for job ?
         location = self.driver.find_element_by_id("text-input-where")
         location.send_keys(len(location.get_attribute('value')) * Keys.BACK_SPACE)
         location.send_keys(self.location)
@@ -246,7 +260,7 @@ class JobFinder:
         # Write into the `file_name` Excel file
         file_loc = ''.join([OUTPUT_PATH, file_name, '.xlsx'])
         df.to_excel(file_loc)
-        print(f"This data are written in {colored(file_loc, 'cyan')}\n")
+        print(f"These data are written in {colored(file_loc, 'cyan')}\n")
 
         # Close the driver
         self.driver.quit()

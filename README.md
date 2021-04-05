@@ -20,21 +20,24 @@ To install the material in your computer:
 - Open your Terminal
 - Go to the [job_search](https://github.com/djibybalde/job_search) folder and install the necessary packages as following.
 ```bash
-$ cd job_search
-$ pip install pipenv
-$ pipenv install
+cd job_search
+pip install pipenv  # install pipenv library
+pipenv install      # package installation: all dependencies – libraries 
+pipenv shell        # environment activation 
 ```
-or 
+<!--
+or
 ```bash
 $ cd job_search
 $ pip install job_search
 ```
+-->
 
 - After installation, run the following to scrape your job and apply it. 
 ```bash
-$ python
->>> from indeed import JobFinder
->>> JobFinder().get_results()
+python
+>>> from indeed import JobFinder  # import JobFinder module
+>>> JobFinder().get_results()     # start scraping 
 ```
 
 - You can also specifier some arguments:
@@ -44,14 +47,14 @@ $ python
 - `max_numb[OPTIONAL]`: How many example of job do you want to apply ? Default is 20 
 
 ```bash
-$ python
+python
 >>> from indeed import JobFinder
 >>> JobFinder(login=True, job_title='Data Science', location='Lyon', max_numb=10).get_results()
 ```
 
 [![asciicast](https://asciinema.org/a/BCNnHPIbBAoS3qdwTF5po1foi.svg)](https://asciinema.org/a/BCNnHPIbBAoS3qdwTF5po1foi)
 
-- ***Note that*** if you set `login=True`, your [fr.indeed.com](https://fr.indeed.com) `email` and `password` will be asked to login.
+- ***Note that*** if you set `login=True`, your [fr.indeed.com](https://fr.indeed.com) `usernam (email)` and `password` will be asked to login.
 
 ________________________________________________________________________________________________________________________
 **Enjoy with [JobFinder](https://github.com/djibybalde/job_search) and *good Luck!***

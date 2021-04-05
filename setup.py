@@ -20,7 +20,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
 
-    url="https://github.com/djibybalde/myproject",
+    url="https://github.com/djibybalde/job_search",
     author="Djiby BALDE",
     author_email="dybalde@gmail.com",
 
